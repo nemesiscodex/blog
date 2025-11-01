@@ -1,0 +1,90 @@
+<!-- SEO: Enhanced Open Graph meta tags - Always enabled (removed series taxonomy condition) -->
+{{ $ogImage := "" }}
+{{ $ogType := "website" }}
+
+{{ if .IsPage }}
+  {{ $ogType = "article" }}
+  {{ if .Params.Cover }}
+    {{ $ogImage = .Params.Cover | absURL }}
+  {{ else if .Params.images }}
+    {{ $ogImage = index .Params.images 0 | absURL }}
+  {{ end }}
+{{ end }}
+
+{{ if not $ogImage }}
+  {{ if .Site.Params.authorImage }}
+    {{ $authorImg := resources.Get .Site.Params.authorImage }}
+    {{ if $authorImg }}
+      {{ $ogImage = $authorImg.RelPermalink | absURL }}
+    {{ else }}
+      {{ $ogImage = .Site.Params.authorImage | absURL }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $description := "" }}
+{{ if .IsHome }}
+  {{ $description = .Site.Params.homeSubtitle | default .Site.Params.description }}
+{{ else }}
+  {{ $description = .Params.Description | default .Summary | default .Site.Params.homeSubtitle | plainify | truncate 155 }}
+{{ end }}
+
+{{ $title := "" }}
+{{ if .IsHome }}
+  {{ $title = .Site.Title }}
+{{ else }}
+  {{ $title = printf "%s :: %s" .Title .Site.Title }}
+{{ end }}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="{{ $ogType }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+{{ if $ogImage }}
+<meta property="og:image" content="{{ $ogImage }}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+{{ end }}
+
+{{ if .IsPage }}
+  {{ if .Params.date }}
+  <meta property="article:published_time" content="{{ time .Date | time.Format "2006-01-02T15:04:05Z07:00" }}" />
+  {{ end }}
+  {{ if .Lastmod }}
+  <meta property="article:modified_time" content="{{ time .Lastmod | time.Format "2006-01-02T15:04:05Z07:00" }}" />
+  {{ end }}
+  {{ if .Params.author }}
+  <meta property="article:author" content="{{ .Params.author }}" />
+  {{ else if .Site.Params.author }}
+  <meta property="article:author" content="{{ .Site.Params.author }}" />
+  {{ end }}
+  {{ range .Params.tags }}
+  <meta property="article:tag" content="{{ . }}" />
+  {{ end }}
+  {{ range .Params.categories }}
+  <meta property="article:section" content="{{ . }}" />
+  {{ end }}
+{{ end }}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="{{ if $ogImage }}summary_large_image{{ else }}summary{{ end }}" />
+<meta name="twitter:title" content="{{ $title }}" />
+<meta name="twitter:description" content="{{ $description }}" />
+{{ if $ogImage }}
+<meta name="twitter:image" content="{{ $ogImage }}" />
+{{ end }}
+{{ if .Site.Params.social }}
+  {{ range .Site.Params.social }}
+    {{ if eq .name "X" }}
+    <meta name="twitter:site" content="{{ .url }}" />
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<!-- Performance: Preconnect to external domains -->
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+<link rel="dns-prefetch" href="https://www.google-analytics.com" />

@@ -5,7 +5,7 @@
 {{- $controls := .Get "controls" -}}
 {{- $width := .Get "width" | default "100%" -}}
 {{- with $.Page.Resources.Get $path -}}
-  <video {{ if $autoplay }}autoplay{{ end }} {{ if $muted }}muted{{ end }} {{ if $loop }}loop{{ end }} {{ if $controls }}controls{{ end }} width="{{ $width }}">
+  <video fetchpriority="high" {{ if $autoplay }}autoplay{{ end }} {{ if $muted }}muted{{ end }} {{ if $loop }}loop{{ end }} {{ if $controls }}controls{{ end }} width="{{ $width }}">
     <source src="{{ .RelPermalink }}" type="video/mp4">
     Your browser does not support the video tag.
   </video>

@@ -3,16 +3,35 @@ languageCode = 'en-us'
 title = "Nemesiscodex's Blog"
 theme = "hello-friend-ng"
 
+# SEO: Permalink structure - Using :slug instead of :title for better SEO and URL consistency
 [permalinks]
-  posts = "/:title/"
+  posts = "/:slug/"
 
 [markup.goldmark.renderer]
   unsafe = true
+
+# SEO: Sitemap configuration for better search engine discoverability
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+# SEO: Google Analytics configuration
+[services]
+  [services.GoogleAnalytics]
+    ID = "G-J750Q0BHT0"
 
 [params]
   enableGlobalLanguageMenu = true
   disableReadOtherPosts = false
   enableSharingButtons = true
+  
+  # SEO: Site-level SEO parameters
+  author = "Julio Reyes"
+  homeSubtitle = "Exploring software engineering, coding, new technologies, software design, and programming languages"
+  keywords = "backend, frontend, software engineering, software design, developer, tips, tricks, ai, java, typescript, react, html, css, svg"
+  themeColor = "#1a1a1a"
+  authorImage = "images/pic.jpg"
 
   [[menu.main]]
     identifier = "posts"

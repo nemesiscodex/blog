@@ -1,0 +1,69 @@
+<!-- SEO: JSON-LD Structured Data for better search engine understanding -->
+{{ if .IsPage }}
+  <!-- BlogPosting schema for individual posts -->
+  {{ $hasDescription := or .Params.Description .Summary }}
+  {{ $hasImage := or .Params.Cover (and .Params.images (gt (len .Params.images) 0)) }}
+  {{ $twitterUrl := "" }}
+  {{ if .Site.Params.social }}
+    {{ range .Site.Params.social }}
+      {{ if eq .name "X" }}
+        {{ $twitterUrl = .url }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ .Title | jsonify }}{{ if $hasDescription }},
+    "description": {{ if .Params.Description }}{{ .Params.Description | jsonify }}{{ else }}{{ .Summary | plainify | truncate 155 | jsonify }}{{ end }}{{ end }}{{ if $hasImage }},
+    "image": {{ if .Params.Cover }}{{ .Params.Cover | absURL | jsonify }}{{ else }}{{ index .Params.images 0 | absURL | jsonify }}{{ end }}{{ end }},
+    "datePublished": {{ time .Date | time.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+    "dateModified": {{ if .Lastmod }}{{ time .Lastmod | time.Format "2006-01-02T15:04:05Z07:00" | jsonify }}{{ else }}{{ time .Date | time.Format "2006-01-02T15:04:05Z07:00" | jsonify }}{{ end }},
+    "author": {
+      "@type": "Person",
+      "name": {{ if .Params.author }}{{ .Params.author | jsonify }}{{ else }}{{ .Site.Params.author | default "Julio Reyes" | jsonify }}{{ end }}{{ if $twitterUrl }},
+      "url": {{ $twitterUrl | jsonify }}{{ end }},
+      "identifier": "nemesiscodex"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": {{ .Site.Params.author | default "Julio Reyes" | jsonify }}{{ if $twitterUrl }},
+      "url": {{ $twitterUrl | jsonify }}{{ end }}
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ .Permalink | jsonify }}
+    },
+    "url": {{ .Permalink | jsonify }}{{ if .Params.tags }},
+    "keywords": {{ delimit .Params.tags ", " | jsonify }}{{ end }}
+  }
+  </script>
+{{ else if .IsHome }}
+  <!-- Person schema for homepage -->
+  {{ $twitterUrl := "" }}
+  {{ if .Site.Params.social }}
+    {{ range .Site.Params.social }}
+      {{ if eq .name "X" }}
+        {{ $twitterUrl = .url }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": {{ .Site.Params.author | default "Julio Reyes" | jsonify }}{{ if .Site.Params.homeSubtitle }},
+    "description": {{ .Site.Params.homeSubtitle | jsonify }}{{ end }}{{ if .Site.Params.authorImage }},
+    {{ $authorImg := resources.Get .Site.Params.authorImage }}
+    {{ if $authorImg }}
+    "image": {{ $authorImg.RelPermalink | absURL | jsonify }}{{ else }}
+    "image": {{ .Site.Params.authorImage | absURL | jsonify }}{{ end }}{{ end }}{{ if $twitterUrl }},
+    "url": {{ $twitterUrl | jsonify }},
+    "sameAs": [{{ $twitterUrl | jsonify }}]{{ end }},
+    "identifier": "nemesiscodex",
+    "jobTitle": "Software Engineer",
+    "knowsAbout": {{ .Site.Params.keywords | default "software engineering, coding, programming" | jsonify }}
+  }
+  </script>
+{{ end }}
