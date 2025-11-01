@@ -30,7 +30,6 @@ theme = "hello-friend-ng"
   author = "Julio Reyes"
   homeSubtitle = "Exploring software engineering, coding, new technologies, software design, and programming languages"
   keywords = "backend, frontend, software engineering, software design, developer, tips, tricks, ai, java, typescript, react, html, css, svg"
-  themeColor = "#1a1a1a"
   authorImage = "images/pic.jpg"
 
   [[menu.main]]
