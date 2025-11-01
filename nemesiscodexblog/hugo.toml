@@ -6,6 +6,9 @@ theme = "hello-friend-ng"
 [permalinks]
   posts = "/:title/"
 
+[markup.goldmark.renderer]
+  unsafe = true
+
 [params]
   enableGlobalLanguageMenu = true
   disableReadOtherPosts = false
