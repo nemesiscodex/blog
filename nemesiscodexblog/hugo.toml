@@ -42,3 +42,6 @@ theme = "hello-friend-ng"
   [social]
     name = "X"
     url = "https://x.com/nemesiscodex"
+
+[params.Logo]
+  logoText = "nemesiscodex"
