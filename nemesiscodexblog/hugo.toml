@@ -1,0 +1,21 @@
+baseURL = 'https://nemesiscodex.github.io/'
+languageCode = 'en-us'
+title = "Nemesiscodex's Blog"
+theme = "hello-friend-ng"
+
+
+[params]
+  enableGlobalLanguageMenu = true
+  disableReadOtherPosts = false
+  enableSharingButtons = true
+
+  [[menu.main]]
+    identifier = "posts"
+    name       = "Posts"
+    url        = "/posts"
+  [taxonomies]
+    tag      = "tags"
+    category = "categories"
+  [social]
+    name = "X"
+    url = "https://x.com/nemesiscodex"

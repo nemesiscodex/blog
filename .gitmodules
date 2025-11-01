@@ -1,0 +1,4 @@
+[submodule "nemesiscodexblog/public"]
+	path = nemesiscodexblog/public
+	url = git@github.com:nemesiscodex/nemesiscodex.github.io.git
+	branch = main
