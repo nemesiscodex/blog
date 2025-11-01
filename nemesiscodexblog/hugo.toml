@@ -1,8 +1,10 @@
-baseURL = 'https://nemesiscodex.github.io/'
+baseURL = 'https://blog.nemesiscodex.org/'
 languageCode = 'en-us'
 title = "Nemesiscodex's Blog"
 theme = "hello-friend-ng"
 
+[permalinks]
+  posts = "/:title/"
 
 [params]
   enableGlobalLanguageMenu = true
