@@ -22,7 +22,7 @@ theme = "hello-friend-ng"
     ID = "G-J750Q0BHT0"
 
 [params]
-  enableGlobalLanguageMenu = true
+  enableGlobalLanguageMenu = false
   disableReadOtherPosts = false
   enableSharingButtons = true
   
