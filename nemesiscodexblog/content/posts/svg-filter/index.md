@@ -1,10 +1,10 @@
 ---
-title: "SVG Filters"
+title: "SVG Filter"
 description: "This is a walkthrough of using SVG filters to create blob-like gradient effects with blurred, merging shapes. We'll build it step by step, starting from a basic page."
 date: 2025-11-01T15:57:27-03:00
 draft: false
 toc: false
-images:
+images: ["svg-filter/post-cover.png"]
 tags:
   - svg
   - html

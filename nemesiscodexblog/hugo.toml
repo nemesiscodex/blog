@@ -28,9 +28,9 @@ theme = "hello-friend-ng"
   
   # SEO: Site-level SEO parameters
   author = "Julio Reyes"
-  homeSubtitle = "Exploring software engineering, coding, new technologies, software design, and programming languages"
+  homeSubtitle = "Exploring software engineering, architecture, and modern development practices"
   keywords = "backend, frontend, software engineering, software design, developer, tips, tricks, ai, java, typescript, react, html, css, svg"
-  authorImage = "images/pic.jpg"
+  authorImage = "blog-image.png"
 
   [[menu.main]]
     identifier = "posts"
