@@ -25,6 +25,7 @@ theme = "hello-friend-ng"
   enableGlobalLanguageMenu = false
   disableReadOtherPosts = false
   enableSharingButtons = true
+  themColor = "dark"
   
   # SEO: Site-level SEO parameters
   author = "Julio Reyes"
