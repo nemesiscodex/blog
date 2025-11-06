@@ -14,7 +14,7 @@ tags:
 
 I will teach you **3 patterns that will immediately improve the reliability of your API calls**.
 
-Everyone seems to think only about the happy path when integrating with 3rd party APIs. But what about failures? Unreliable network conditions, timeouts, server crashes, etc. These are all real problems that can cost you money, data integrity, and user trust.
+Everyone seems to think only about the happy path when integrating with third-party APIs. But what about failures? Unreliable network conditions, timeouts, server overload, third-party APIs may not be reliable and are out of your control. These are all real problems that can cost you money, data integrity, and user trust.
 
 ## TL;DR
 
@@ -676,3 +676,53 @@ The next time you integrate with a 3rd party API, ask yourself:
 - What if the server crashes mid-process?
 
 With these patterns in place, you'll have answers to all of these questions.
+
+## Going Further: Asynchronous Processing
+
+Instead of making third-party API calls synchronously (inline), consider processing them asynchronously. 
+
+When a client submits a transaction request, return a `200 OK` immediately after storing the transaction in your database. The client gets a result right away and doesn't need to wait for the third-party API response. Then execute the actual third-party API call later using a scheduler or by publishing the transaction to a message queue like Kafka.
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant Client
+  participant Backend
+  participant DB as Database
+  participant Queue as Message Queue<br/>(Kafka/Scheduler)
+  participant API as 3rd Party API
+
+  activate Client
+  Client->>Backend: POST /transaction (payload)
+  activate Backend
+  Backend->>DB: INSERT transaction (status: PENDING)
+  activate DB
+  DB-->>Backend: write OK
+  deactivate DB
+  Backend->>Queue: Publish transaction event
+  activate Queue
+  Backend-->>Client: 200 OK (transactionId, status: PENDING)
+  deactivate Backend
+  deactivate Client
+  
+  Note over Queue,Backend: Asynchronous processing
+  
+  Queue->>Backend: Consume transaction event
+  activate Backend
+  Backend->>DB: Read transaction details
+  activate DB
+  DB-->>Backend: transaction data
+  deactivate DB
+  Backend->>API: POST /bank/transaction
+  activate API
+  API-->>Backend: 200 OK (result)
+  deactivate API
+  Backend->>DB: UPDATE transaction (status: COMPLETED, result)
+  activate DB
+  DB-->>Backend: write OK
+  deactivate DB
+  deactivate Backend
+  deactivate Queue
+```
+
+This approach decouples your API from external dependencies and provides better resilience.
