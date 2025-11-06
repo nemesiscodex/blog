@@ -7,7 +7,7 @@ description: "About Julio Daniel Reyes (nemesiscodex) and this blog."
 
 {{< image src="/img/julio.jpg" alt="Julio Daniel Reyes" position="left" style="max-width:140px;border-radius:50%;margin-right:14px;" >}}
 
-Hi — I’m Julio Daniel Reyes, a generalist software engineer from Paraguay. Online I go by `nemesiscodex`.
+Hi - I’m Julio Daniel Reyes, a generalist software engineer from Paraguay. Online I go by `nemesiscodex`.
 
 I enjoy building practical, reliable software and exploring systems across the stack. I have more than 12 years of experience, mostly in fintech and education. Day to day I work with Java, Scala, JavaScript/TypeScript, Python, and Rust.
 
