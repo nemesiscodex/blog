@@ -1,0 +1,6 @@
+User-agent: *
+Disallow:
+
+# Point crawlers to the sitemap
+Sitemap: https://blog.nemesiscodex.org/sitemap.xml
+

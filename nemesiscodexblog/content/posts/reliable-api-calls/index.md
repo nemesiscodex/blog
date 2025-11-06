@@ -1,15 +1,19 @@
----
-title: "Reliable API Calls"
+  ---
+title: "These 3 Patterns Will Make Your 3rd-Party API Calls More Reliable"
+slug: "reliable-api-calls"
 date: 2025-11-02T00:21:02-03:00
 draft: false
 toc: true
 images: ["reliable-api-calls/post-cover.png"]
 tags:
-  - software-engineering
-  - api
-  - backend
+  - api-design
   - reliability
-  - database
+  - resilience
+  - idempotency
+  - state-machines
+  - retries
+  - optimistic-locking
+  - system-design
 ---
 
 I will teach you **3 patterns that will immediately improve the reliability of your API calls**.
@@ -726,3 +730,5 @@ sequenceDiagram
 ```
 
 This approach decouples your API from external dependencies and provides better resilience.
+
+More patterns are coming as we dive into asynchronous processing - stay tuned.

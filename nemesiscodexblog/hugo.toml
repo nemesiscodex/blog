@@ -25,11 +25,16 @@ theme = "hello-friend-ng"
   enableGlobalLanguageMenu = false
   disableReadOtherPosts = false
   enableSharingButtons = true
-  themColor = "dark"
-  
+  # UI/theme
+  themeColor = "dark"
+
   # SEO: Site-level SEO parameters
   author = "Julio Reyes"
   homeSubtitle = "Exploring software engineering, architecture, and modern development practices"
+  # Used in <title> for homepage alongside site title
+  subtitle = "Software engineering, architecture, and modern development"
+  # Optional site-wide description fallback
+  description = "Deep dives, notes, and practical guides on modern software engineering, architecture, and developer workflows."
   keywords = "backend, frontend, software engineering, software design, developer, tips, tricks, ai, java, typescript, react, html, css, svg"
   authorImage = "blog-image.png"
 
@@ -37,12 +42,46 @@ theme = "hello-friend-ng"
     identifier = "posts"
     name       = "Posts"
     url        = "/posts"
+  [[menu.main]]
+    identifier = "about"
+    name       = "About"
+    url        = "/about/"
   [taxonomies]
     tag      = "tags"
     category = "categories"
-  [social]
+
+  # Social profiles used for links, Twitter Cards, and JSON-LD
+  # Add/adjust as needed. Leave commented ones until accounts exist.
+  [[params.social]]
     name = "X"
     url = "https://x.com/nemesiscodex"
+    rel = "me"
+    nonewpage = 0
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/nemesiscodex"
+    rel = "me"
+    nonewpage = 0
+  # [[params.social]]
+  #   name = "facebook"
+  #   url = "https://www.facebook.com/<your-page>"
+  #   rel = "me"
+  #   nonewpage = 0
+  # [[params.social]]
+  #   name = "instagram"
+  #   url = "https://www.instagram.com/<your-handle>"
+  #   rel = "me"
+  #   nonewpage = 0
+  # [[params.social]]
+  #   name = "youtube"
+  #   url = "https://www.youtube.com/@<your-channel>"
+  #   rel = "me"
+  #   nonewpage = 0
+  # [[params.social]]
+  #   name = "linkedin"
+  #   url = "https://www.linkedin.com/in/<your-profile>"
+  #   rel = "me"
+  #   nonewpage = 0
 
 [params.Logo]
   logoText = "nemesiscodex"
