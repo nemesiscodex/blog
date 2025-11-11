@@ -1,0 +1,65 @@
+{{/*
+  Partial: post-cover.html
+  Usage: {{ partial "post-cover.html" . }}
+  Resolves a cover/thumbnail image for a page from, in order:
+  - .Params.cover or .Params.Cover (string path or URL)
+  - .Params.thumbnail (string path or URL)
+  - first of .Params.images ([]string)
+  - Page resources matching names beginning with "cover", "featured", or "thumbnail"; otherwise the first image resource
+
+  If the resolved value is a string without a leading "/" and not an absolute URL,
+  it is normalized to "/images/<value>" to align with repo conventions.
+*/}}
+{{- $thumb := "" -}}
+
+{{- with .Resources.GetMatch "cover*" -}}
+    {{- $thumb = .RelPermalink -}}
+  {{- end -}}
+{{- if not $thumb -}}
+  {{- with .Resources.GetMatch "featured*" -}}
+    {{- $thumb = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $thumb -}}
+  {{- with .Resources.GetMatch "thumbnail*" -}}
+    {{- $thumb = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $thumb -}}
+  {{- with .Resources.ByType "image" -}}
+    {{- with index . 0 -}}
+      {{- $thumb = .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $thumb -}}
+  {{- with .Params.cover -}}
+    {{- $thumb = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $thumb -}}
+  {{- with .Params.Cover -}}
+    {{- $thumb = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $thumb -}}
+  {{- with .Params.thumbnail -}}
+    {{- $thumb = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $thumb -}}
+  {{- with .Params.images -}}
+    {{- if gt (len .) 0 -}}
+      {{- $thumb = index . 0 -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $thumb -}}
+  {{- $src := $thumb -}}
+  {{- if and (not (hasPrefix $src "/")) (not (hasPrefix $src "http")) -}}
+    {{- $src = (print "/images/" $src) -}}
+  {{- end -}}
+  <img class="post-thumb" src="{{ $src | relURL }}" alt="{{ .Title }} cover" loading="lazy" />
+{{- end -}}

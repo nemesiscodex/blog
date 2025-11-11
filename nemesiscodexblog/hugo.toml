@@ -27,6 +27,8 @@ theme = "hello-friend-ng"
   enableSharingButtons = true
   # UI/theme
   themeColor = "dark"
+  # Custom CSS files (served from /static)
+  customCSS = ["/css/custom.css"]
 
   # SEO: Site-level SEO parameters
   author = "Julio Reyes"
@@ -37,6 +39,9 @@ theme = "hello-friend-ng"
   description = "Deep dives, notes, and practical guides on modern software engineering, architecture, and developer workflows."
   keywords = "backend, frontend, software engineering, software design, developer, tips, tricks, ai, java, typescript, react, html, css, svg"
   authorImage = "blog-image.png"
+  # X/Twitter handles for cards/meta
+  twitterSite = "@nemesiscodex"
+  twitterCreator = "@nemesiscodex"
 
   [[menu.main]]
     identifier = "posts"

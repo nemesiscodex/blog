@@ -74,13 +74,43 @@
 <meta name="twitter:description" content="{{ $description }}" />
 {{ if $ogImage }}
 <meta name="twitter:image" content="{{ $ogImage }}" />
+  {{ $imgAlt := "" }}
+  {{ with .Params.coverAlt }}{{ $imgAlt = . }}{{ end }}
+  {{ if not $imgAlt }}{{ $imgAlt = $title }}{{ end }}
+  <meta name="twitter:image:alt" content="{{ $imgAlt }}" />
 {{ end }}
-{{ if .Site.Params.social }}
-  {{ range .Site.Params.social }}
-    {{ if eq .name "X" }}
-    <meta name="twitter:site" content="{{ .url }}" />
+{{/* Derive twitter:site and twitter:creator as @handles, not URLs */}}
+{{ $twitterSite := "" }}
+{{ $twitterCreator := "" }}
+
+{{ with .Site.Params.twitterSite }}
+  {{ $twitterSite = . }}
+{{ else }}
+  {{ with (where $.Site.Params.social "name" "in" (slice "X" "twitter")) }}
+    {{ with (index . 0) }}
+      {{ $url := .url }}
+      {{ $derived := replaceRE `^https?://(?:www\.)?(?:x|twitter)\.com/([^/?#]+)/?.*$` "@${1}" $url }}
+      {{ $twitterSite = $derived }}
     {{ end }}
   {{ end }}
+{{ end }}
+
+{{ with .Site.Params.twitterCreator }}
+  {{ $twitterCreator = . }}
+{{ end }}
+
+{{ if and $twitterSite (not (hasPrefix $twitterSite "@")) }}
+  {{ $twitterSite = printf "@%s" $twitterSite }}
+{{ end }}
+{{ if and $twitterCreator (not (hasPrefix $twitterCreator "@")) }}
+  {{ $twitterCreator = printf "@%s" $twitterCreator }}
+{{ end }}
+
+{{ with $twitterSite }}
+<meta name="twitter:site" content="{{ . }}" />
+{{ end }}
+{{ with $twitterCreator }}
+<meta name="twitter:creator" content="{{ . }}" />
 {{ end }}
 
 <!-- Performance: Preconnect to external domains -->

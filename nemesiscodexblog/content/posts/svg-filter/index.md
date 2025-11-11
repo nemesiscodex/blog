@@ -5,7 +5,7 @@ description: "This is a walkthrough of using SVG filters to create blob-like gra
 date: 2025-11-01T15:57:27-03:00
 draft: false
 toc: false
-images: ["svg-filter/post-cover.png"]
+images: ["/images/svg-filter/svg-filter.gif"]
 tags:
   - svg
   - svg-filters

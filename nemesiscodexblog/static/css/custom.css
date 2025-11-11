@@ -1,0 +1,24 @@
+/* Post list: render images as full-width covers */
+.post-item .post-item-inner {
+  display: block;
+  align-items: initial;
+}
+
+.post-item .post-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 40/21;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0 0 8px 0;
+}
+
+.post-item .post-title {
+  display: block;
+  margin: 4px 0 2px 0;
+}
+
+.post-item .post-day {
+  display: block;
+  margin-left: 0;
+}

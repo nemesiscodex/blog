@@ -4,7 +4,7 @@ slug: "reliable-api-calls"
 date: 2025-11-02T00:21:02-03:00
 draft: false
 toc: true
-images: ["reliable-api-calls/post-cover.png"]
+images: ["/images/reliable-api-calls/naive-api.gif"]
 tags:
   - api-design
   - reliability

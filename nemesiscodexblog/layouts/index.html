@@ -27,7 +27,8 @@
                         <ul class="posts-list">
                             {{ range .Pages }}
                                 <li class="post-item">
-                                    <a href="{{.Permalink}}" class="post-item-inner">
+                                    <a href="{{ .RelPermalink }}" class="post-item-inner">
+                                        {{ partial "post-cover.html" . }}
                                         <span class="post-title">{{.Title}}</span>
                                         <span class="post-day">
                                             {{ if .Site.Params.dateformShort }}
@@ -46,4 +47,3 @@
         {{ end }}
     </main>
 {{ end }}
-
