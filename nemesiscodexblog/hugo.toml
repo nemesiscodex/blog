@@ -67,6 +67,11 @@ theme = "hello-friend-ng"
     url = "https://github.com/nemesiscodex"
     rel = "me"
     nonewpage = 0
+  [[params.social]]
+    name = "youtube"
+    url = "https://www.youtube.com/@nemesiscodex"
+    rel = "me"
+    nonewpage = 0
   # [[params.social]]
   #   name = "facebook"
   #   url = "https://www.facebook.com/<your-page>"
@@ -78,8 +83,8 @@ theme = "hello-friend-ng"
   #   rel = "me"
   #   nonewpage = 0
   # [[params.social]]
-  #   name = "youtube"
-  #   url = "https://www.youtube.com/@<your-channel>"
+  #   name = "linkedin"
+  #   url = "https://www.linkedin.com/in/<your-profile>"
   #   rel = "me"
   #   nonewpage = 0
   # [[params.social]]
