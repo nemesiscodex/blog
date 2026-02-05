@@ -1,6 +1,6 @@
 {{ define "main" }}
     <main>
-        <div>
+        <div class="home-hero">
             {{ if .Site.Params.Portrait.Path }}
                 <img src="{{ .Site.Params.Portrait.Path }}" class="circle" alt="{{ .Site.Params.Portrait.Alt }}" style="max-width:{{ .Site.Params.Portrait.MaxWidth }}" />
             {{ end }}
@@ -10,7 +10,7 @@
             {{ partial "subtitle.html" . }}
 
             {{- with .Site.Params.social }}
-                <div>
+                <div class="home-social">
                     {{ partial "social-icons.html" . }}
                 </div>
             {{- end }}
@@ -19,7 +19,7 @@
         <!-- Posts List -->
         {{ $posts := where .Site.RegularPages "Section" "posts" }}
         {{ if $posts }}
-            <div class="posts" style="margin-top: 3rem;">
+            <div class="posts home-posts">
                 {{ range $posts.GroupByDate "2006" }}
                     <div class="posts-group">
                         <div class="post-year">{{ .Key }}</div>
