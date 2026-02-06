@@ -29,6 +29,8 @@ theme = "hello-friend-ng"
   themeColor = "dark"
   # Custom CSS files (served from /static)
   customCSS = ["/css/custom.css"]
+  # Custom JS files (served from /static)
+  customJS = ["/js/custom.js"]
 
   # SEO: Site-level SEO parameters
   author = "Julio Reyes"
