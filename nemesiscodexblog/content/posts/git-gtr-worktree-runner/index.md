@@ -3,7 +3,7 @@ title: "A Better Way to Run Git Worktrees Finally!"
 slug: "git-gtr-worktree-runner"
 description: "A pragmatic walkthrough of git-gtr, a CLI from CodeRabbit that makes Git worktrees practical for daily development with editor and AI integrations."
 date: 2026-02-05T12:00:00-03:00
-draft: true
+draft: false
 toc: true
 images: ["https://img.youtube.com/vi/r9uGLZ3AkWo/maxresdefault.jpg"]
 tags:
