@@ -17,7 +17,7 @@ serve: dev
 
 # Production build: clean unused resources and minify
 build:
-	hugo --gc --minify
+	hugo --gc --minify --cleanDestinationDir
 
 # Alias for build
 prod: build

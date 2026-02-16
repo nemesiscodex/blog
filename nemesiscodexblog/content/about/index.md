@@ -1,7 +1,7 @@
 ---
 title: "About"
 slug: "about"
-draft: true
+draft: false
 description: "About Julio Daniel Reyes (nemesiscodex) and this blog."
 ---
 
