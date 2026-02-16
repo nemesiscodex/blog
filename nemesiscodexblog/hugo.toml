@@ -39,6 +39,8 @@ theme = "hello-friend-ng"
   subtitle = "Software engineering, architecture, and modern development"
   # Optional site-wide description fallback
   description = "Deep dives, notes, and practical guides on modern software engineering, architecture, and developer workflows."
+  # Posts index (/posts/) description fallback
+  postsDescription = "Technical posts on software engineering, architecture, backend reliability, AI coding workflows, and developer productivity."
   keywords = "backend, frontend, software engineering, software design, developer, tips, tricks, ai, java, typescript, react, html, css, svg"
   authorImage = "blog-image.png"
   # X/Twitter handles for cards/meta
