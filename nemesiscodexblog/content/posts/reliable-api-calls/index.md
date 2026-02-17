@@ -4,7 +4,7 @@ slug: "reliable-api-calls"
 date: 2025-11-02T00:21:02-03:00
 draft: false
 toc: true
-images: ["/images/reliable-api-calls/naive-api.gif"]
+images: ["/posts/reliable-api-calls/naive-api-poster.png"]
 tags:
   - api-design
   - reliability
@@ -41,6 +41,12 @@ Everyone seems to think only about the happy path when integrating with third-pa
 ## Naive Approach
 
 Let's start with this seemingly innocent diagram. Can you spot what's wrong with it?
+
+<video autoplay muted loop playsinline width="100%" poster="naive-api-poster.png" aria-label="Naive third-party API call flow animation">
+  <source src="naive-api.webm" type="video/webm" />
+  <source src="naive-api.mp4" type="video/mp4" />
+  <img src="naive-api-poster.png" alt="Naive API flow where the backend calls a third-party API before persisting state" />
+</video>
 
 ```mermaid
 sequenceDiagram
