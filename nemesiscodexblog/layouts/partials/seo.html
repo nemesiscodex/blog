@@ -22,12 +22,16 @@
   {{ end }}
 {{ end }}
 
+{{ $defaultPostsDescription := "Technical posts on software engineering, architecture, backend reliability, AI coding workflows, and developer productivity." }}
 {{ $description := "" }}
 {{ if .IsHome }}
   {{ $description = .Site.Params.homeSubtitle | default .Site.Params.description }}
+{{ else if and .IsSection (eq .Section "posts") }}
+  {{ $description = .Params.Description | default .Site.Params.postsDescription | default $defaultPostsDescription }}
 {{ else }}
-  {{ $description = .Params.Description | default .Summary | default .Site.Params.homeSubtitle | plainify | truncate 155 }}
+  {{ $description = .Params.Description | default .Summary | default .Site.Params.description | default .Site.Params.homeSubtitle }}
 {{ end }}
+{{ $description = $description | plainify | truncate 155 }}
 
 {{ $title := "" }}
 {{ if .IsHome }}

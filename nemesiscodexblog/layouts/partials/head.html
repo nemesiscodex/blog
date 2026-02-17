@@ -7,7 +7,17 @@
 {{ end }}
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="{{ if .Params.author }}{{ .Params.author }}{{ else if .Site.Author }}{{ range .Site.Author }}{{ . }} {{ end }}{{ else }}{{ .Site.Params.author }}{{ end }}">
-<meta name="description" content="{{ if .IsHome }}{{ .Site.Params.homeSubtitle }}{{ else }}{{ if .Params.Description }}{{ .Params.Description }}{{ else }}{{ .Summary | plainify }}{{ end }}{{ end }}" />
+{{ $defaultPostsDescription := "Technical posts on software engineering, architecture, backend reliability, AI coding workflows, and developer productivity." }}
+{{ $description := "" }}
+{{ if .IsHome }}
+  {{ $description = .Site.Params.homeSubtitle | default .Site.Params.description }}
+{{ else if and .IsSection (eq .Section "posts") }}
+  {{ $description = .Params.Description | default .Site.Params.postsDescription | default $defaultPostsDescription }}
+{{ else }}
+  {{ $description = .Params.Description | default .Summary | default .Site.Params.description | default .Site.Params.homeSubtitle }}
+{{ end }}
+{{ $description = $description | plainify | truncate 155 }}
+<meta name="description" content="{{ $description }}" />
 <meta name="keywords" content="{{ .Site.Params.keywords }}{{ if .Params.tags }}{{ range .Params.tags }}, {{ . }}{{ end }}{{ end }}" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="{{ .Site.Params.themeColor }}" />
