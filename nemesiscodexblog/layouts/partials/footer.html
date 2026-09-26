@@ -1,0 +1,14 @@
+<footer class="site-footer site-shell">
+  <div>
+    <a class="footer-brand" href="{{ "/" | relURL }}">nemesiscodex<span class="brand-dot">.</span></a>
+    <p>A software engineer's notes, from Paraguay.</p>
+  </div>
+  <div class="footer-links">
+    <a href="{{ "about/" | relURL }}">About</a>
+    <a href="{{ "posts/index.xml" | relURL }}">RSS</a>
+    {{ range .Site.Params.social }}
+      <a href="{{ .url }}" rel="me">{{ if eq .name "github" }}GitHub{{ else if eq .name "youtube" }}YouTube{{ else }}{{ .name }}{{ end }}</a>
+    {{ end }}
+  </div>
+  <p class="footer-note">&copy; {{ now.Year }} {{ .Site.Params.author }}</p>
+</footer>

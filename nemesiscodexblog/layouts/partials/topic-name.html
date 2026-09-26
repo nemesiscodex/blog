@@ -1,0 +1,5 @@
+{{- $label := replace . "-" " " | lower | humanize -}}
+{{- range $word, $name := dict "ai" "AI" "api" "API" "cli" "CLI" "css" "CSS" "svg" "SVG" -}}
+  {{- $label = replaceRE (printf "(?i)\\b%s\\b" $word) $name $label -}}
+{{- end -}}
+{{- return $label -}}

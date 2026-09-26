@@ -1,0 +1,10 @@
+<article class="post-row" data-search="{{ printf "%s %s %s" .Title (.Description | default (.Summary | plainify)) (delimit (.Params.tags | default slice) " ") | lower }}">
+  <div class="post-row-body">
+    {{ partial "post-meta.html" . }}
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}<span class="article-arrow" aria-hidden="true">↗</span></a></h2>
+    <p>{{ .Description | default (.Summary | plainify) | truncate 180 }}</p>
+    <div class="post-topics">
+      {{ range first 3 (.GetTerms "tags") }}<a href="{{ .RelPermalink }}">{{ partial "topic-name.html" .LinkTitle }}</a>{{ end }}
+    </div>
+  </div>
+</article>

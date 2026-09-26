@@ -1,45 +1,76 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const firstParagraph = document.querySelector(".post-content > p:first-of-type");
+const searchInput = document.querySelector("#article-search");
 
-  if (!firstParagraph || firstParagraph.querySelector(".first-word")) {
-    return;
-  }
+if (searchInput) {
+  const articles = [...document.querySelectorAll("#article-list .post-row")];
+  const count = document.querySelector("[data-search-count]");
+  const empty = document.querySelector("[data-search-empty]");
 
-  const walker = document.createTreeWalker(firstParagraph, NodeFilter.SHOW_TEXT);
-  let textNode = null;
-
-  while (walker.nextNode()) {
-    const current = walker.currentNode;
-    if (current.nodeValue && current.nodeValue.trim().length > 0) {
-      textNode = current;
-      break;
+  function filterArticles() {
+    const words = searchInput.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    let matches = 0;
+    for (const article of articles) {
+      const visible = words.every((word) => article.dataset.search.includes(word));
+      article.hidden = !visible;
+      if (visible) matches += 1;
     }
+    count.textContent = matches + (matches === 1 ? " article" : " articles");
+    empty.hidden = matches !== 0;
   }
 
-  if (!textNode) {
-    return;
+  document.querySelector("[data-search-controls]").hidden = false;
+  searchInput.addEventListener("input", filterArticles);
+  document.querySelector("[data-search-clear]").addEventListener("click", () => {
+    searchInput.value = "";
+    filterArticles();
+    searchInput.focus();
+  });
+  window.addEventListener("pageshow", filterArticles);
+  filterArticles();
+}
+
+if (navigator.clipboard && window.isSecureContext) {
+  const status = document.createElement("span");
+  status.className = "visually-hidden";
+  status.setAttribute("role", "status");
+  document.body.append(status);
+
+  function attachCopy(button, getText, successMessage) {
+    let reset;
+    const label = button.textContent;
+    button.addEventListener("click", async () => {
+      clearTimeout(reset);
+      try {
+        await navigator.clipboard.writeText(getText());
+        button.textContent = "Copied!";
+        status.textContent = successMessage;
+      } catch {
+        button.textContent = "Try again";
+        status.textContent = "Could not copy. Select and copy the text manually.";
+      }
+      reset = setTimeout(() => {
+        button.textContent = label;
+        status.textContent = "";
+      }, 2500);
+    });
   }
 
-  const match = textNode.nodeValue.match(/^(\s*)(\S+)([\s\S]*)$/);
-  if (!match) {
-    return;
+  document.querySelectorAll(".highlight").forEach((block) => {
+    const code = block.querySelector("pre code");
+    if (!code) return;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "copy-code";
+    button.textContent = "Copy";
+    button.setAttribute("aria-label", "Copy code");
+    block.append(button);
+    attachCopy(button, () => code.textContent, "Code copied to clipboard.");
+  });
+
+  const linkButton = document.querySelector("[data-copy-link]");
+  if (linkButton) {
+    linkButton.hidden = false;
+    attachCopy(linkButton,
+      () => document.querySelector('link[rel="canonical"]')?.href || location.href,
+      "Article link copied to clipboard.");
   }
-
-  const [, leading, word, rest] = match;
-  const fragment = document.createDocumentFragment();
-
-  if (leading) {
-    fragment.appendChild(document.createTextNode(leading));
-  }
-
-  const span = document.createElement("span");
-  span.className = "first-word";
-  span.textContent = word;
-  fragment.appendChild(span);
-
-  if (rest) {
-    fragment.appendChild(document.createTextNode(rest));
-  }
-
-  textNode.parentNode.replaceChild(fragment, textNode);
-});
+}

@@ -1,0 +1,8 @@
+{{ define "main" }}
+  <main id="main" class="site-shell error-page" tabindex="-1">
+    <p class="eyebrow">404 / Page not found</p>
+    <h1>Nothing at this address<span class="brand-dot">.</span></h1>
+    <p>The page may have moved. There's more to read in the notebook.</p>
+    <a class="button button-primary" href="{{ "posts/" | relURL }}">Browse articles <span aria-hidden="true">→</span></a>
+  </main>
+{{ end }}

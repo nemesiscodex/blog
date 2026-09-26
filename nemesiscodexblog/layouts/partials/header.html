@@ -1,0 +1,19 @@
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="site-shell header-inner">
+    <a class="brand" href="{{ "/" | relURL }}" aria-label="Nemesiscodex home">
+      <span class="brand-mark" aria-hidden="true">&gt;_</span>
+      <span>nemesis<span class="brand-suffix">codex</span><span class="brand-dot">.</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      {{ range .Site.Menus.main }}
+        {{ $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) (eq $.Section .Identifier) (and $.IsHome (eq .Identifier "posts")) }}
+        <a href="{{ .URL | relURL }}"{{ if $active }} aria-current="{{ if $.IsPage }}true{{ else }}page{{ end }}"{{ end }}>{{ if eq .Identifier "posts" }}Writing{{ else }}{{ .Name }}{{ end }}</a>
+      {{ end }}
+    </nav>
+    <a class="header-rss" href="{{ "posts/index.xml" | relURL }}">
+      <span aria-hidden="true">{{ partial "svg.html" (dict "name" "rss") }}</span>
+      <span>RSS feed</span>
+    </a>
+  </div>
+</header>

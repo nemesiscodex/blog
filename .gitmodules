@@ -2,3 +2,6 @@
 	path = nemesiscodexblog/public
 	url = git@github.com:nemesiscodex/nemesiscodex.github.io.git
 	branch = main
+[submodule "nemesiscodexblog/themes/hello-friend-ng"]
+	path = nemesiscodexblog/themes/hello-friend-ng
+	url = https://github.com/rhazdon/hugo-theme-hello-friend-ng.git

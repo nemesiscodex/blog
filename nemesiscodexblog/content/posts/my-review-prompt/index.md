@@ -139,7 +139,7 @@ If you find it useful, please star the repository. And if you want to see more c
 Here is a walkthrough showing the prompt in action:
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
-  <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/lxDpAMaVDeY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe title="AI code review prompt demonstration" loading="lazy" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/lxDpAMaVDeY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 The video shows a real review of a CLI feature that checks for new versions. Even though the change was straightforward, the prompt found several issues worth addressing before merging.

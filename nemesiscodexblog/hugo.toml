@@ -10,6 +10,9 @@ theme = "hello-friend-ng"
 [markup.goldmark.renderer]
   unsafe = true
 
+[markup.highlight]
+  style = "github-dark"
+
 # SEO: Sitemap configuration for better search engine discoverability
 [sitemap]
   changefreq = "monthly"
@@ -26,7 +29,7 @@ theme = "hello-friend-ng"
   disableReadOtherPosts = false
   enableSharingButtons = true
   # UI/theme
-  themeColor = "dark"
+  themeColor = "#111315"
   # Custom CSS files (served from /static)
   customCSS = ["/css/custom.css"]
   # Custom JS files (served from /static)
@@ -51,10 +54,17 @@ theme = "hello-friend-ng"
     identifier = "posts"
     name       = "Posts"
     url        = "/posts"
+    weight     = 10
   [[menu.main]]
     identifier = "about"
     name       = "About"
     url        = "/about/"
+    weight     = 30
+  [[menu.main]]
+    identifier = "tags"
+    name       = "Topics"
+    url        = "/tags/"
+    weight     = 20
   [taxonomies]
     tag      = "tags"
     category = "categories"

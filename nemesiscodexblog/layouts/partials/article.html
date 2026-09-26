@@ -1,0 +1,48 @@
+{{ $isPost := eq .Section "posts" }}
+<main id="main" class="site-shell article-page{{ if not $isPost }} standalone-page{{ end }}" tabindex="-1">
+  <article>
+    <header class="article-header">
+      <a class="eyebrow back-link" href="{{ "posts/" | relURL }}"><span aria-hidden="true">←</span> All writing</a>
+      <h1>{{ .Title }}</h1>
+      {{ if $isPost }}
+        {{ with .Description }}<p class="article-description">{{ . }}</p>{{ end }}
+        <div class="article-byline">
+          <a class="byline-author" href="{{ "about/" | relURL }}"><img src="{{ "img/julio.jpg" | relURL }}" alt="" width="32" height="32">{{ .Site.Params.author }}</a>
+          {{ partial "post-meta.html" . }}
+        </div>
+      {{ end }}
+    </header>
+    <div class="article-layout{{ if not .Params.toc }} without-toc{{ end }}">
+      {{ if .Params.toc }}
+        <aside class="article-toc" aria-label="Table of contents">
+          <details open>
+            <summary>On this page</summary>
+            {{ .TableOfContents }}
+          </details>
+        </aside>
+      {{ end }}
+      <div class="article-body">
+        {{ with .Params.Cover }}
+          <figure class="post-cover">
+            <img src="{{ . | absURL }}" alt="{{ $.Params.coverAlt | default $.Title }}">
+            {{ with $.Params.CoverCaption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+          </figure>
+        {{ end }}
+        <div class="post-content">{{ .Content }}</div>
+        {{ if $isPost }}
+          <footer class="article-footer">
+            <div class="post-topics">{{ range .GetTerms "tags" }}<a href="{{ .RelPermalink }}">{{ partial "topic-name.html" .LinkTitle }}</a>{{ end }}</div>
+            {{ if .Site.Params.enableSharingButtons }}<button class="button copy-link" type="button" data-copy-link hidden>Copy article link</button>{{ end }}
+          </footer>
+          {{ if not .Site.Params.disableReadOtherPosts }}
+            <nav class="read-next" aria-label="More articles">
+              <h2>Keep reading</h2>
+              {{ with .NextInSection }}<a href="{{ .RelPermalink }}"><span>{{ .Title }}</span><span aria-hidden="true">↗</span></a>{{ end }}
+              {{ with .PrevInSection }}<a href="{{ .RelPermalink }}"><span>{{ .Title }}</span><span aria-hidden="true">↗</span></a>{{ end }}
+            </nav>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </article>
+</main>
