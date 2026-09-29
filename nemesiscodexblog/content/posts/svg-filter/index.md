@@ -5,7 +5,7 @@ description: "This is a walkthrough of using SVG filters to create blob-like gra
 date: 2025-11-01T15:57:27-03:00
 draft: false
 toc: false
-images: ["/images/svg-filter/svg-filter.gif"]
+images: ["/posts/svg-filter/svg-filter-poster.png"]
 tags:
   - svg
   - svg-filters
@@ -17,7 +17,11 @@ tags:
 ---
 
 
-{{< video src="video/svg-filter.mp4" autoplay="true" muted="true" loop="true" width="100%" >}}
+<video autoplay muted loop playsinline width="100%" poster="svg-filter-poster.png" aria-label="Animated SVG filter gooey effect demo">
+  <source src="svg-filter.webm" type="video/webm" />
+  <source src="svg-filter.mp4" type="video/mp4" />
+  <img src="svg-filter-poster.png" alt="Two colorful gradient circles blending with an SVG gooey filter effect" />
+</video>
 
 Notice how those blobs smoothly merge and separate? That's SVG filters at work.
 
